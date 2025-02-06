@@ -17,6 +17,7 @@ import humidityIcon from "../assets/humidity.png";
 const Weather = () => {
   const inputRef = useRef();
   const [weatherData, setWeatherData] = useState(false);
+  const [bgImage, setBgImage] = useState(""); // State for background image
 
   const allIcons = {
     "01d": clearIcon,
@@ -33,6 +34,23 @@ const Weather = () => {
     "10n": rainIcon,
     "13d": snowIcon,
     "13n": snowIcon,
+  };
+
+  const backgroundImages = {
+    "01d": "clear.jpg",
+    "01n": "clear.jpg",
+    "02d": "cloudy.jpg",
+    "02n": "cloudy.jpg",
+    "03d": "cloudy.jpg",
+    "03n": "cloudy.jpg",
+    "04d": "drizzle.jpg",
+    "04n": "winter.jpg",
+    "09d": "rainy.jpg",
+    "09n": "rainy.jpg",
+    "10d": "drizzle.jpg",
+    "10n": "rainy.jpg",
+    "13d": "drizzle.jpg",
+    "13n": "drizzle.jpg",
   };
 
   const showToastEnterCity = () => {
@@ -53,7 +71,7 @@ const Weather = () => {
     });
   };
   const showToastCityNotFound = () => {
-    toast.error("city not found!", {
+    toast.error("City not found!", {
       style: { borderRadius: "15px", background: "#f0f0f0", color: "#333" },
       position: "top-right",
       autoClose: 3000,
@@ -76,13 +94,16 @@ const Weather = () => {
         return;
       }
 
+      const weatherIcon = data.weather[0].icon;
       setWeatherData({
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
         temperature: Math.floor(data.main.temp),
         location: data.name,
-        icon: allIcons[data.weather[0].icon] || clearIcon,
+        icon: allIcons[weatherIcon] || clearIcon,
       });
+
+      setBgImage(backgroundImages[weatherIcon] || "drizzle.jpg");
     } catch (error) {
       console.error("Fetch error:", error);
       showToastApi();
@@ -90,55 +111,66 @@ const Weather = () => {
   }, []);
 
   useEffect(() => {
-    search("nashik");
+    search("london");
   }, [search]);
 
   return (
-    <div className="weather">
+    <div
+      className="weather"
+      style={{
+        backgroundImage: `url(/bgImages/${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        transition: "background 0.5s ease-in-out",
+      }}
+    >
       <ToastContainer />
-      <div className="search-bar">
-        <input type="text" ref={inputRef} placeholder="Search" />
-        <img
-          src={searchIcon}
-          alt="search logo"
-          onClick={() => search(inputRef.current.value)}
-        />
+      <h1 className="weather-title">Weather App</h1>
+      <div className="weather-box">
+        <div className="search-bar">
+          <input type="text" ref={inputRef} placeholder="Search" />
+          <img
+            src={searchIcon}
+            alt="search logo"
+            onClick={() => search(inputRef.current.value)}
+          />
+        </div>
+
+        {weatherData ? (
+          <>
+            <img src={weatherData.icon} className="weather-icon" alt="" />
+            <p
+              className="temperature"
+              style={{
+                color: "#ffff",
+                fontSize: "9vh",
+                lineHeight: "1",
+              }}
+            >
+              {weatherData.temperature}°c
+            </p>
+            <p className="location">{weatherData.location}</p>
+
+            <div className="weather-data">
+              <div className="col">
+                <img src={humidityIcon} alt="" />
+                <div>
+                  <p>{weatherData.humidity}</p>
+                  <span>Humidity</span>
+                </div>
+              </div>
+
+              <div className="col">
+                <img src={windIcon} alt="" />
+                <div>
+                  <p>{weatherData.windSpeed}</p>
+                  <span>Wind Speed</span>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
       </div>
-
-      {weatherData ? (
-        <>
-          <img src={weatherData.icon} className="weather-icon" alt="" />
-          <p
-            className="temperature"
-            style={{
-              color: "#ffff",
-              fontSize: "9vh",
-              lineHeight: "1",
-            }}
-          >
-            {weatherData.temperature}°c
-          </p>
-          <p className="location">{weatherData.location}</p>
-
-          <div className="weather-data">
-            <div className="col">
-              <img src={humidityIcon} alt="" />
-              <div>
-                <p>{weatherData.humidity}</p>
-                <span>Humidity</span>
-              </div>
-            </div>
-
-            <div className="col">
-              <img src={windIcon} alt="" />
-              <div>
-                <p>{weatherData.windSpeed}</p>
-                <span>Wind Speed</span>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
     </div>
   );
 };
