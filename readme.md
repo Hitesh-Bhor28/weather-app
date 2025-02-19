@@ -1,22 +1,11 @@
 # 🌤️ Weather App  
 
-## **🔹 COMPANY:** CODTECH IT SOLUTIONS  
-## **🔹 NAME:** HITESH BHOR  
-## **🔹 INTERN ID:** CT08OFU  
-## **🔹 DOMAIN:** MERN STACK DEVELOPMENT  
-## **🔹 DURATION:** 4 WEEKS  
-## **🔹 MENTOR:** NEELA SANTOSH  
-
----
-
-# 🌤️ Weather App  
-
-## **🔹 COMPANY:** CODTECH IT SOLUTIONS  
-## **🔹 NAME:** HITESH BHOR  
-## **🔹 INTERN ID:** AAA  
-## **🔹 DOMAIN:** MERN STACK DEVELOPMENT  
-## **🔹 DURATION:** 4 WEEKS  
-## **🔹 MENTOR:** NEELA SANTOSH  
+ **🔹 COMPANY:** CODTECH IT SOLUTIONS  
+ **🔹 NAME:** HITESH DNYANESHWAR BHOR   
+ **🔹 INTERN ID:** CT08OFU  
+ **🔹 DOMAIN:** MERN STACK DEVELOPMENT  
+ **🔹 DURATION:** 4 WEEKS  
+ **🔹 MENTOR:** NEELA SANTOSH  
 
 ---
 
