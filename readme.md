@@ -1,5 +1,9 @@
 # 🌤️ Weather App  
 
+## 🖼️ Project Images   
+
+![Weather App](./assets/1.png)
+
 The **Weather App** is a modern and interactive weather forecasting tool that provides real-time weather information for any city worldwide. The app is built using **React.js** and integrates the **OpenWeather API** to fetch accurate weather data.  
 
 It features **search functionality, live updates for temperature, humidity, and wind speed, and a dynamic background that changes based on the temperature.** This ensures a visually appealing and immersive user experience.  
